@@ -1,4 +1,3 @@
-// MatchedUserCard.js
 import React from 'react';
 
 function MatchedUserCard({ user, onUnmatch, onChat }) {

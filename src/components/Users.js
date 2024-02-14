@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import UserCard from './UserCard';
+import SearchFilter from './SearchFilter';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [searchKeyword, setSearchKeyword] = useState('');
 
-  // Fetch content related to Husky Connect (organizations, events, safety info, etc.)
   useEffect(() => {
-    // Sample data for Husky Connect
     const fetchedUsers = [
       {
         name: 'Diego Garcia',
@@ -47,9 +48,8 @@ const Users = () => {
     ];
 
     setUsers(fetchedUsers);
-  }, []); // Empty dependency array to fetch content once on component mount
+  }, []); 
 
-  // Swipe left and swipe right handlers
   const handleSwipeLeft = (index) => {
     const newUsers = [...users];
     newUsers[index].visible = false;
@@ -62,8 +62,30 @@ const Users = () => {
     setUsers(newUsers);
   };
 
-  // Map users to UserCard components
-  const userCards = users.map((user, index) => (
+  const handleFilter = useCallback((keyword) => {
+    setSearchKeyword(keyword);
+    const filteredUsers = users.filter((user) => {
+      return (
+        user.name.toLowerCase().includes(keyword.toLowerCase()) ||
+        user.title.toLowerCase().includes(keyword.toLowerCase()) ||
+        user.content.toLowerCase().includes(keyword.toLowerCase()) ||
+        user.major.toLowerCase().includes(keyword.toLowerCase()) ||
+        user.description.toLowerCase().includes(keyword.toLowerCase())
+      );
+    });
+    setFilteredUsers(filteredUsers);
+  }, [users]);
+
+  useEffect(() => {
+    if (searchKeyword === '') {
+      setFilteredUsers(users);
+    } else {
+      handleFilter(searchKeyword);
+    }
+  }, [searchKeyword, users, handleFilter]);
+
+
+  const userCards = filteredUsers.map((user, index) => (
     <UserCard
       key={user.name}
       {...user}
@@ -74,6 +96,7 @@ const Users = () => {
 
   return (
     <div className="container">
+      <SearchFilter onFilter={(keyword) => handleFilter(keyword)} />
       <div className="row">
         {userCards}
       </div>

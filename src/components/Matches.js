@@ -10,28 +10,28 @@ function Matches() {
       major: 'Environmental Science',
       title: 'UW RSO: Environmental Club Meeting',
       content: 'Learn about eco-friendly initiatives and environmental projects.',
-      img: `images/jb-profile.jpeg`,
+      img: `/images/at-profile.jpeg`,
     },
     {
       name: 'Elijah Rodriguez',
       major: 'Mechanical Engineering',
       title: 'Robotics Workshop',
       content: 'Explore the world of robotics and hands-on building projects.',
-      img: `images/cj-profile.jpeg`,
+      img: `/images/er-profile.jpeg`,
     },
     {
       name: 'Olivia Martinez',
       major: 'Marketing',
       title: 'Marketing Strategy Seminar',
       content: 'Discover the latest trends and strategies in marketing.',
-      img: `images/hc-profile.jpeg`,
+      img: `/images/om-profile.jpeg`,
     },
     {
       name: 'Samuel Lee',
       major: 'Psychology',
       title: 'Mindfulness and Stress Management Session',
       content: 'Learn techniques to manage stress and enhance mindfulness.',
-      img: `images/hc-profile.jpeg`,
+      img: `/images/hc-profile.jpeg`,
     },
   ];
 
@@ -41,7 +41,6 @@ function Matches() {
 
   const handleFilter = () => {
     const filteredUsers = initialMatchedUsers.filter((user) => {
-      // Change the condition to search by multiple properties
       return (
         user.name.toLowerCase().includes(searchKeyword.toLowerCase()) ||
         user.title.toLowerCase().includes(searchKeyword.toLowerCase()) ||
@@ -81,7 +80,7 @@ function Matches() {
         <form onSubmit={(event) => {
           event.preventDefault();
           handleFilter();
-        }}>
+        }} className="filter-bar">
           <div>
             <label htmlFor="searchKeyword">Search by Keyword:</label>
             <input

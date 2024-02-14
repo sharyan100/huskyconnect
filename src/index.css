@@ -376,3 +376,48 @@ body {
     color: #666;
     margin-top: 5px;
   }
+
+  .filter-bar {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .filter-bar label {
+    margin-right: 10px;
+  }
+  
+  .filter-bar input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px 0 0 10px;
+    font-size: 14px;
+  }
+  
+  .filter-bar button {
+    padding: 8px 16px;
+    background-color: #f0f0f0; 
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .filter-bar button:hover {
+    background-color: #ddd;
+  }
+
+  .created-post {
+    border: 1px solid #ccc;
+    margin: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px; 
+    width: 100%; 
+    box-sizing: border-box; 
+  }
+  
+
+  

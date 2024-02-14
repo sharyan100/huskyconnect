@@ -1,13 +1,13 @@
-// Profile.js
 import React, { useState } from 'react';
 
 function Profile({ onCreatePost }) {
   const [name, setName] = useState('Alexa');
-  const [major, setMajor] = useState('Nursing');
+  const [major, setMajor] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
+  const [createdPosts, setCreatedPosts] = useState([]);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -30,7 +30,6 @@ function Profile({ onCreatePost }) {
   };
 
   const handleImageChange = (event) => {
-    // Access the uploaded file
     const file = event.target.files[0];
     setImage(file);
   };
@@ -45,7 +44,9 @@ function Profile({ onCreatePost }) {
       description,
       image,
     };
-    // Pass the new post to the parent component
+
+    setCreatedPosts([...createdPosts, newPost]);
+
     onCreatePost(newPost);
   };
 
@@ -55,11 +56,11 @@ function Profile({ onCreatePost }) {
       <form onSubmit={handleCreatePost}>
         <div className="form-group">
           <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="name" value={name} onChange={handleNameChange} readOnly />
+          <input type="text" id="name" name="name" value={name} onChange={handleNameChange} />
         </div>
         <div className="form-group">
           <label htmlFor="major">Major:</label>
-          <input type="text" id="major" name="major" value={major} onChange={handleMajorChange} readOnly />
+          <input type="text" id="major" name="major" value={major} onChange={handleMajorChange} />
         </div>
         <div className="form-group">
           <label htmlFor="title">Title:</label>
@@ -81,6 +82,24 @@ function Profile({ onCreatePost }) {
           <button type="submit" className="btn btn-primary">Create Post</button>
         </div>
       </form>
+
+      <div>
+        <h2>Created Posts</h2>
+        {createdPosts.map((post, index) => (
+          <div key={index} className="created-post">
+            <p>Name: {post.name}</p>
+            <p>Major: {post.major}</p>
+            <p>Title: {post.title}</p>
+            <p>Content: {post.content}</p>
+            <p>Description: {post.description}</p>
+            {post.image && (
+              <div>
+                <img src={URL.createObjectURL(post.image)} alt="Uploaded" style={{ maxWidth: '100%', maxHeight: '200px' }} />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

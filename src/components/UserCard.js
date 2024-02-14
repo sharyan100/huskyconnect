@@ -28,7 +28,7 @@ const UserCard = ({ name, major, title, content, description, imageSrc, onSwipeL
             <p>Major: {major}</p>
             <h4>{title}</h4>
             <p>{content}</p>
-            <p>{description}</p> {/* New line to display the description */}
+            <p>{description}</p> 
           </div>
           <div className="button-container">
             <button className="swipe-button dont-care" onClick={handleSwipeLeft}>Don't Care</button>

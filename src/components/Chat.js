@@ -10,7 +10,7 @@ function Chat({ user }) {
     if (newMessage.trim() !== '') {
       const newMessageObject = {
         content: newMessage,
-        sender: user.name,
+        sender: 'Alexa',
         timestamp: new Date().getTime(),
       };
       const updatedConversations = {
