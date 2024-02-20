@@ -12,13 +12,13 @@ import { initializeApp } from "firebase/app";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAUgnLrpn2X-ZRgSarp7YMiJpYU2-qXR2w",
-  authDomain: "uw-friend-finder.firebaseapp.com",
-  projectId: "uw-friend-finder",
-  storageBucket: "uw-friend-finder.appspot.com",
-  messagingSenderId: "437213582893",
-  appId: "1:437213582893:web:f483a9a850cb92f1f44aa4",
-  measurementId: "G-LSTYNVWJBD"
+  apiKey: "AIzaSyBDzyjFk8OirTT_tg84XW6Czbit4i2Fizk",
+  authDomain: "huskyconnect-807a6.firebaseapp.com",
+  databaseURL: "https://huskyconnect-807a6-default-rtdb.firebaseio.com",
+  projectId: "huskyconnect-807a6",
+  storageBucket: "huskyconnect-807a6.appspot.com",
+  messagingSenderId: "58371412457",
+  appId: "1:58371412457:web:e42a58f3f8e61851a73b78"
 };
 
 // Initialize Firebase
