@@ -1,30 +1,39 @@
-// Chat.js
 import React, { useState, useEffect } from 'react';
+import { getDatabase, ref, push, onValue } from "firebase/database";
 
 function Chat({ user }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
-  const [conversations, setConversations] = useState({});
+
+  useEffect(() => {
+    const db = getDatabase();
+    const messagesRef = ref(db, `messages/${user.name}`);
+
+    onValue(messagesRef, (snapshot) => {
+      const data = snapshot.val() || {};
+      const loadedMessages = Object.keys(data).map(key => data[key]);
+      setMessages(loadedMessages);
+    });
+
+    return () => {
+      // Cleanup listener
+    };
+  }, [user.name]);
 
   const handleSendMessage = () => {
     if (newMessage.trim() !== '') {
-      const newMessageObject = {
+      const db = getDatabase();
+      const messagesRef = ref(db, `messages/${user.name}`);
+
+      push(messagesRef, {
         content: newMessage,
-        sender: 'Alexa',
+        sender: user.name,
         timestamp: new Date().getTime(),
-      };
-      const updatedConversations = {
-        ...conversations,
-        [user.name]: [...(conversations[user.name] || []), newMessageObject],
-      };
-      setConversations(updatedConversations);
+      });
+
       setNewMessage('');
     }
   };
-
-  useEffect(() => {
-    setMessages(conversations[user.name] || []);
-  }, [conversations, user]);
 
   const messageElements = messages.map((message, index) => (
     <div key={index} className={`message ${message.sender === user.name ? 'self' : 'other'}`}>
