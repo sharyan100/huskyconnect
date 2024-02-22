@@ -1,7 +1,7 @@
-import { getAuth, EmailAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, EmailAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import { useState, useEffect } from 'react';
 
-// Object of configuration values
 const firebaseUiConfigObj = {
   signInOptions: [
     GoogleAuthProvider.PROVIDER_ID,
@@ -18,12 +18,30 @@ const firebaseUiConfigObj = {
 
 export default function Login() {
   const auth = getAuth();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
 
   return (
     <div>
-      <h1>My App</h1>
-      <p>Please sign-in:</p>
-      <StyledFirebaseAuth uiConfig={firebaseUiConfigObj} firebaseAuth={auth} />
+      {user ? (
+        <div>
+          <h1>Welcome, {user.displayName}!</h1>
+          <p>You are now signed in.</p >
+        </div>
+      ) : (
+        <div>
+          <h1>My App</h1>
+          <p>Please sign-in:</p >
+          <StyledFirebaseAuth uiConfig={firebaseUiConfigObj} firebaseAuth={auth} />
+        </div>
+      )}
     </div>
   );
 }
