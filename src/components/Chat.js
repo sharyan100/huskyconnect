@@ -8,29 +8,26 @@ function Chat({ user }) {
   useEffect(() => {
     const db = getDatabase();
     const messagesRef = ref(db, `messages/${user.name}`);
-
+    
     onValue(messagesRef, (snapshot) => {
       const data = snapshot.val() || {};
       const loadedMessages = Object.keys(data).map(key => data[key]);
       setMessages(loadedMessages);
     });
-
-    return () => {
-      // Cleanup listener
-    };
+  
   }, [user.name]);
 
   const handleSendMessage = () => {
     if (newMessage.trim() !== '') {
       const db = getDatabase();
       const messagesRef = ref(db, `messages/${user.name}`);
-
+    
       push(messagesRef, {
         content: newMessage,
-        sender: user.name,
+        sender: 'Alexa',
         timestamp: new Date().getTime(),
       });
-
+  
       setNewMessage('');
     }
   };
