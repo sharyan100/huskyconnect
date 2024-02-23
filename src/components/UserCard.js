@@ -22,7 +22,7 @@ const UserCard = ({ name, major, title, content, description, imageSrc, onSwipeL
     <div className="col-6 col-lg-3">
       <div className="user mb-4 uw-themed-card">
         <div className="user-body">
-          <img className="pb-3 profile-image img-fluid" src={imageSrc} alt={`Profile of ${name}`} />
+        <img className="pb-3 profile-image img-fluid" src={imageSrc} alt={`Profile of ${name}`} style={{ maxWidth: '100%', maxHeight: '200px' }} />
           <div>
             <h2>{name}</h2>
             <p>Major: {major}</p>

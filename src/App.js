@@ -1,4 +1,3 @@
-// App.js
 import React, { useState } from 'react';
 import './index.css';
 import Header from './components/Header';
@@ -10,14 +9,11 @@ import Login from './components/Login';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
-  const [posts, setPosts] = useState([]);
+  const [latestUser, setLatestUser] = useState(null);
 
-  const handleCreatePost = (newPost) => {
-    // Handle the creation of the post here
-    console.log('New Post:', newPost);
-
-    // Update the posts state to include the new post
-    setPosts((prevPosts) => [...prevPosts, newPost]);
+  const handleCreatePost = (newUser) => {
+    console.log('New User:', newUser);
+    setLatestUser(newUser);
   };
 
   return (
@@ -28,12 +24,15 @@ function App() {
           <Route path="profile" element={<Profile onCreatePost={handleCreatePost} />} />
           <Route path="login" element={<Login />} />
           <Route path="matches" element={<Matches />} />
-          <Route path="/" element={<Users posts={posts} />} />
+          <Route
+            path="/"
+            element={<Users latestUser={latestUser} />} 
+          />
           <Route path="match" element={<Match />} />
         </Routes>
       </main>
       <footer>
-        <p>&copy; 2024 HuskyConnect. All rights reserved.</p>
+        <p>&copy; Husky Connect. All rights reserved.</p>
       </footer>
     </div>
   );

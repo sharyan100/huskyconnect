@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import UserCard from './UserCard';
 import SearchFilter from './SearchFilter';
 
-const Users = () => {
+const Users = ({ posts, latestUser }) => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -47,8 +47,20 @@ const Users = () => {
       },
     ];
 
+    if (latestUser) {
+      fetchedUsers.unshift({
+        name: latestUser.name,
+        major: latestUser.major,
+        title: latestUser.title,
+        content: latestUser.content,
+        description: latestUser.description,
+        imageSrc: URL.createObjectURL(latestUser.image),
+        visible: true,
+      });
+    }
+
     setUsers(fetchedUsers);
-  }, []); 
+  }, [latestUser]);
 
   const handleSwipeLeft = (index) => {
     const newUsers = [...users];
