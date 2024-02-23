@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import UserCard from './UserCard';
 import SearchFilter from './SearchFilter';
 
-const Users = ({ posts, latestUser }) => {
+const Users = ({ posts, latestUser, cared, onCareClick }) => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -59,8 +59,9 @@ const Users = ({ posts, latestUser }) => {
       });
     }
 
-    setUsers(fetchedUsers);
-  }, [latestUser]);
+  const visibleUsers = fetchedUsers.filter(user => !cared.includes(user.name));
+  setUsers(visibleUsers);
+}, [latestUser, cared]);
 
   const handleSwipeLeft = (index) => {
     const newUsers = [...users];
@@ -68,41 +69,46 @@ const Users = ({ posts, latestUser }) => {
     setUsers(newUsers);
   };
 
-  const handleSwipeRight = (index) => {
-    const newUsers = [...users];
-    newUsers[index].visible = false;
-    setUsers(newUsers);
+  // const handleSwipeRight = (index) => {
+  //   const newUsers = [...users];
+  //   newUsers[index].visible = false;
+  //   setUsers(newUsers);
+  // };
+
+  const handleSwipeRight = (userName) => {
+    onCareClick(userName);
   };
 
   const handleFilter = useCallback((keyword) => {
     setSearchKeyword(keyword);
-    const filteredUsers = users.filter((user) => {
-      return (
-        user.name.toLowerCase().includes(keyword.toLowerCase()) ||
-        user.title.toLowerCase().includes(keyword.toLowerCase()) ||
-        user.content.toLowerCase().includes(keyword.toLowerCase()) ||
-        user.major.toLowerCase().includes(keyword.toLowerCase()) ||
-        user.description.toLowerCase().includes(keyword.toLowerCase())
-      );
-    });
-    setFilteredUsers(filteredUsers);
-  }, [users]);
+    const filtered = users.filter(user => (
+      (user.name.toLowerCase().includes(keyword.toLowerCase()) ||
+      user.title.toLowerCase().includes(keyword.toLowerCase()) ||
+      user.content.toLowerCase().includes(keyword.toLowerCase()) ||
+      user.major.toLowerCase().includes(keyword.toLowerCase()) ||
+      user.description.toLowerCase().includes(keyword.toLowerCase())) &&
+      !cared.includes(user.name)
+    ));
+    setFilteredUsers(filtered);
+  }, [users, cared]);
 
   useEffect(() => {
-    if (searchKeyword === '') {
-      setFilteredUsers(users);
-    } else {
-      handleFilter(searchKeyword);
-    }
-  }, [searchKeyword, users, handleFilter]);
-
+    const filtered = searchKeyword === '' ? users : users.filter(user => (
+      user.name.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+      user.title.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+      user.content.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+      user.major.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+      user.description.toLowerCase().includes(searchKeyword.toLowerCase())
+    ) && !cared.includes(user.name));
+    setFilteredUsers(filtered);
+  }, [searchKeyword, users, cared]);
 
   const userCards = filteredUsers.map((user, index) => (
     <UserCard
       key={user.name}
       {...user}
       onSwipeLeft={() => handleSwipeLeft(index)}
-      onSwipeRight={() => handleSwipeRight(index)}
+      onSwipeRight={() => handleSwipeRight(user.name)}
     />
   ));
 

@@ -10,6 +10,16 @@ import { Route, Routes } from 'react-router-dom';
 
 function App() {
   const [latestUser, setLatestUser] = useState(null);
+  const [cared, setCared] = useState([]);
+
+  const handleCareClick = userName => {
+    setCared(currentCared => {
+      if (!currentCared.includes(userName)) {
+        return [...currentCared, userName];
+      }
+      return currentCared;
+    });
+  };
 
   const handleCreatePost = (newUser) => {
     console.log('New User:', newUser);
@@ -23,10 +33,10 @@ function App() {
         <Routes>
           <Route path="profile" element={<Profile onCreatePost={handleCreatePost} />} />
           <Route path="login" element={<Login />} />
-          <Route path="matches" element={<Matches />} />
+          <Route path="matches" element={<Matches cared={cared} />} />
           <Route
             path="/"
-            element={<Users latestUser={latestUser} />} 
+            element={<Users latestUser={latestUser} cared={cared} onCareClick={handleCareClick} />}
           />
           <Route path="match" element={<Match />} />
         </Routes>
@@ -39,3 +49,4 @@ function App() {
 }
 
 export default App;
+
