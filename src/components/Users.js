@@ -2,6 +2,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import UserCard from './UserCard';
 import SearchFilter from './SearchFilter';
 
+const DEFAULT_IMAGE_PATH = 'images/uw-purple-background.jpeg';
+
+
 const Users = ({ posts, latestUser, cared, onCareClick }) => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -47,7 +50,19 @@ const Users = ({ posts, latestUser, cared, onCareClick }) => {
       },
     ];
 
-    if (latestUser) {
+    // if an image is not provided by the user, a default image is used for error handling.
+
+    if (latestUser && !latestUser.image) {
+      fetchedUsers.unshift({
+        name: latestUser.name,
+        major: latestUser.major,
+        title: latestUser.title,
+        content: latestUser.content,
+        description: latestUser.description,
+        imageSrc: DEFAULT_IMAGE_PATH,
+        visible: true,
+      });
+    } else if (latestUser) {
       fetchedUsers.unshift({
         name: latestUser.name,
         major: latestUser.major,
@@ -102,6 +117,8 @@ const Users = ({ posts, latestUser, cared, onCareClick }) => {
     ) && !cared.includes(user.name));
     setFilteredUsers(filtered);
   }, [searchKeyword, users, cared]);
+
+
 
   const userCards = filteredUsers.map((user, index) => (
     <UserCard
