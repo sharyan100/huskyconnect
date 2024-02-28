@@ -5,30 +5,26 @@ import Chat from './Chat';
 function Matches({ cared }) {
   const initialMatchedUsers = [
     {
-      name: 'Diego Garcia',
+      name: 'UW RSO: Coding Club Meeting',
       major: 'Computer Science',
-      title: 'UW RSO: Coding Club Meeting',
       content: 'Discussing the latest programming trends and projects.',
       img: `images/diego-garcia-profile.jpg`,
     },
     {
-      name: 'Ayesha Khan',
+      name: 'Campus Safety Tips',
       major: 'Psychology',
-      title: 'Campus Safety Tips',
       content: 'Stay safe on campus with these essential safety tips.',
       img: `images/ayesha-khan-profile.jpg`,
     },
     {
-      name: 'John Davis',
+      name: 'Upcoming Campus Event: Fall Festival',
       major: 'Business Administration',
-      title: 'Upcoming Campus Event: Fall Festival',
       content: 'Join us for a day of fun, food, and festivities!',
       img: `images/john-davis-profile.jpg`,
     },
     {
-      name: 'Emma Smith',
+      name: 'Major Spotlight: Biology Research Opportunities',
       major: 'Biology',
-      title: 'Major Spotlight: Biology Research Opportunities',
       content: 'Explore research opportunities in the field of Biology.',
       img: `images/emma-smith-profile.jpg`,
     },
@@ -45,7 +41,6 @@ function Matches({ cared }) {
   
     const filteredByKeyword = filteredByCared.filter(user =>
       user.name.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-      user.title.toLowerCase().includes(searchKeyword.toLowerCase()) ||
       user.content.toLowerCase().includes(searchKeyword.toLowerCase()) ||
       user.major.toLowerCase().includes(searchKeyword.toLowerCase())
     );
@@ -79,7 +74,7 @@ function Matches({ cared }) {
   return (
     <div className="matches-container">
       <div className="profiles-container">
-        <h2>Matched Users</h2>
+        <h2>Matched Posts</h2>
         <form onSubmit={event => {
           event.preventDefault();
         }} className="filter-bar">

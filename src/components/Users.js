@@ -13,36 +13,32 @@ const Users = ({ posts, latestUser, cared, onCareClick }) => {
   useEffect(() => {
     const fetchedUsers = [
       {
-        name: 'Diego Garcia',
+        name: 'UW RSO: Coding Club Meeting',
         major: 'Computer Science',
-        title: 'UW RSO: Coding Club Meeting',
         content: 'Discussing the latest programming trends and projects.',
         description: "Hey, I'm Diego, the founder of HuskyCoding. Join our Coding Club meeting to explore the world of programming!",
         imageSrc: `images/diego-garcia-profile.jpg`,
         visible: true,
       },
       {
-        name: 'Ayesha Khan',
+        name: 'Campus Safety Tips',
         major: 'Psychology',
-        title: 'Campus Safety Tips',
         content: 'Stay safe on campus with these essential safety tips.',
         description: "Hello, I'm Ayesha. Learn valuable safety tips to ensure a secure campus experience.",
         imageSrc: `images/ayesha-khan-profile.jpg`,
         visible: true,
       },
       {
-        name: 'John Davis',
+        name: 'Upcoming Campus Event: Fall Festival',
         major: 'Business Administration',
-        title: 'Upcoming Campus Event: Fall Festival',
         content: 'Join us for a day of fun, food, and festivities!',
         description: "Hi, I'm John. Exciting times ahead! Don't miss our upcoming Fall Festival event.",
         imageSrc: `images/john-davis-profile.jpg`,
         visible: true,
       },
       {
-        name: 'Emma Smith',
+        name: 'Major Spotlight: Biology Research Opportunities',
         major: 'Biology',
-        title: 'Major Spotlight: Biology Research Opportunities',
         content: 'Explore research opportunities in the field of Biology.',
         description: "Greetings! I'm Emma. Dive into Biology research opportunities with us.",
         imageSrc: `images/emma-smith-profile.jpg`,
@@ -51,12 +47,11 @@ const Users = ({ posts, latestUser, cared, onCareClick }) => {
     ];
 
     // if an image is not provided by the user, a default image is used for error handling.
-
+    
     if (latestUser && !latestUser.image) {
       fetchedUsers.unshift({
         name: latestUser.name,
         major: latestUser.major,
-        title: latestUser.title,
         content: latestUser.content,
         description: latestUser.description,
         imageSrc: DEFAULT_IMAGE_PATH,
@@ -66,7 +61,6 @@ const Users = ({ posts, latestUser, cared, onCareClick }) => {
       fetchedUsers.unshift({
         name: latestUser.name,
         major: latestUser.major,
-        title: latestUser.title,
         content: latestUser.content,
         description: latestUser.description,
         imageSrc: URL.createObjectURL(latestUser.image),
@@ -98,7 +92,6 @@ const Users = ({ posts, latestUser, cared, onCareClick }) => {
     setSearchKeyword(keyword);
     const filtered = users.filter(user => (
       (user.name.toLowerCase().includes(keyword.toLowerCase()) ||
-      user.title.toLowerCase().includes(keyword.toLowerCase()) ||
       user.content.toLowerCase().includes(keyword.toLowerCase()) ||
       user.major.toLowerCase().includes(keyword.toLowerCase()) ||
       user.description.toLowerCase().includes(keyword.toLowerCase())) &&
@@ -110,7 +103,6 @@ const Users = ({ posts, latestUser, cared, onCareClick }) => {
   useEffect(() => {
     const filtered = searchKeyword === '' ? users : users.filter(user => (
       user.name.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-      user.title.toLowerCase().includes(searchKeyword.toLowerCase()) ||
       user.content.toLowerCase().includes(searchKeyword.toLowerCase()) ||
       user.major.toLowerCase().includes(searchKeyword.toLowerCase()) ||
       user.description.toLowerCase().includes(searchKeyword.toLowerCase())

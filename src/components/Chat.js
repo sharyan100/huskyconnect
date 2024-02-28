@@ -24,7 +24,7 @@ function Chat({ user }) {
     
       push(messagesRef, {
         content: newMessage,
-        sender: 'Alexa',
+        sender: 'User',
         timestamp: new Date().getTime(),
       });
   

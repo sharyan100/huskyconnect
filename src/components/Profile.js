@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
 function Profile({ onCreatePost }) {
-  const [name, setName] = useState('Alexa');
+  const [name, setName] = useState('');
   const [major, setMajor] = useState('');
-  const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
@@ -15,10 +14,6 @@ function Profile({ onCreatePost }) {
 
   const handleMajorChange = (event) => {
     setMajor(event.target.value);
-  };
-
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
   };
 
   const handleContentChange = (event) => {
@@ -39,7 +34,6 @@ function Profile({ onCreatePost }) {
     const newPost = {
       name,
       major,
-      title,
       content,
       description,
       image,
@@ -55,16 +49,12 @@ function Profile({ onCreatePost }) {
       <h2>Create New Post</h2>
       <form onSubmit={handleCreatePost}>
         <div className="form-group">
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="name">Title:</label>
           <input type="text" id="name" name="name" value={name} onChange={handleNameChange} />
         </div>
         <div className="form-group">
           <label htmlFor="major">Major:</label>
           <input type="text" id="major" name="major" value={major} onChange={handleMajorChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="title">Title:</label>
-          <input type="text" id="title" name="title" value={title} onChange={handleTitleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="content">Content:</label>
@@ -87,9 +77,8 @@ function Profile({ onCreatePost }) {
         <h2>Created Posts</h2>
         {createdPosts.map((post, index) => (
           <div key={index} className="created-post">
-            <p>Name: {post.name}</p>
+            <p>Title: {post.name}</p>
             <p>Major: {post.major}</p>
-            <p>Title: {post.title}</p>
             <p>Content: {post.content}</p>
             <p>Description: {post.description}</p>
             {post.image && (

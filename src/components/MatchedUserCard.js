@@ -11,7 +11,6 @@ function MatchedUserCard({ user, onUnmatch, onChat }) {
       <div className="card-body">
         <h3 className="card-title">{user.name}</h3>
         <p>Major: {user.major}</p>
-        <p>Title: {user.title}</p>
         <p>Content: {user.content}</p>
         <div className="form-group">
           <button type="submit" className="btn btn-primary" onClick={handleUnmatchClick}>Unmatch</button>

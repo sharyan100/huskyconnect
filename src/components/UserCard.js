@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const UserCard = ({ name, major, title, content, description, imageSrc, onSwipeLeft, onSwipeRight }) => {
+const UserCard = ({ name, major, content, description, imageSrc, onSwipeLeft, onSwipeRight }) => {
   const [visible, setVisible] = useState(true);
 
   const handleSwipeLeft = () => {
@@ -25,7 +25,6 @@ const UserCard = ({ name, major, title, content, description, imageSrc, onSwipeL
             <div>
               <h2>{name}</h2>
               <p>Major: {major}</p>
-              <h4>{title}</h4>
               <p>{content}</p>
               <p>{description}</p> 
             </div>
@@ -52,8 +51,7 @@ const UserCard = ({ name, major, title, content, description, imageSrc, onSwipeL
         <img className="pb-3 profile-image img-fluid" src={imageSrc} alt={`Profile of ${name}`} style={{ maxWidth: '100%', maxHeight: '200px' }} />
           <div>
             <h2>{name}</h2>
-            <p>Major: {major}</p>
-            <h4>{title}</h4>
+            <h4>Major: {major}</h4>
             <p>{content}</p>
             <p>{description}</p> 
           </div>
