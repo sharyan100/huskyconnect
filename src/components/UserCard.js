@@ -1,8 +1,11 @@
+// UserCard.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import FlagPopup from './FlagPopup'; // Import the FlagPopup component
 
-const UserCard = ({ name, major, content, description, imageSrc, onSwipeLeft, onSwipeRight }) => {
+const UserCard = ({ name, major, content, description, imageSrc, onSwipeLeft, onSwipeRight, onFlag }) => {
   const [visible, setVisible] = useState(true);
+  const [showFlagPopup, setShowFlagPopup] = useState(false); // State to control visibility of flag popup
 
   const handleSwipeLeft = () => {
     setVisible(false);
@@ -12,6 +15,14 @@ const UserCard = ({ name, major, content, description, imageSrc, onSwipeLeft, on
   const handleSwipeRight = () => {
     setVisible(false);
     onSwipeRight();
+  };
+
+  const handleFlagClick = () => {
+    setShowFlagPopup(true); // Show the flag popup when flag button is clicked
+  };
+
+  const handleCloseFlagPopup = () => {
+    setShowFlagPopup(false); // Close the flag popup
   };
 
   if (!imageSrc) {
@@ -29,6 +40,7 @@ const UserCard = ({ name, major, content, description, imageSrc, onSwipeLeft, on
               <p>{description}</p> 
             </div>
             <div className="button-container">
+              <button className="flag-button" onClick={handleFlagClick}>🚩</button> {/* Red flag button */}
               <button className="swipe-button dont-care" onClick={handleSwipeLeft}>Don't Care</button>
               <Link to="/match">
                 <button className="swipe-button care" onClick={handleSwipeRight}>Care</button>
@@ -56,6 +68,7 @@ const UserCard = ({ name, major, content, description, imageSrc, onSwipeLeft, on
             <p>{description}</p> 
           </div>
           <div className="button-container">
+            <button className="flag-button" onClick={handleFlagClick}>🚩</button> {/* Red flag button */}
             <button className="swipe-button dont-care" onClick={handleSwipeLeft}>Don't Care</button>
             <Link to="/match">
               <button className="swipe-button care" onClick={handleSwipeRight}>Care</button>
@@ -63,6 +76,7 @@ const UserCard = ({ name, major, content, description, imageSrc, onSwipeLeft, on
           </div>
         </div>
       </div>
+      {showFlagPopup && <FlagPopup onClose={handleCloseFlagPopup} onFlag={onFlag} />}
     </div>
   );
 };

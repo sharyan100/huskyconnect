@@ -22,8 +22,12 @@ function App() {
   };
 
   const handleCreatePost = (newUser) => {
-    console.log('New User:', newUser);
     setLatestUser(newUser);
+  };
+
+  const handleFlag = (userName) => {
+    // Placeholder for logic to handle flagging a user
+    console.log(`Flagged user: ${userName}`);
   };
 
   return (
@@ -36,7 +40,7 @@ function App() {
           <Route path="matches" element={<Matches cared={cared} />} />
           <Route
             path="/"
-            element={<Users latestUser={latestUser} cared={cared} onCareClick={handleCareClick} />}
+            element={<Users latestUser={latestUser} cared={cared} onCareClick={handleCareClick} onFlag={handleFlag} />}
           />
           <Route path="match" element={<Match />} />
         </Routes>
@@ -49,4 +53,3 @@ function App() {
 }
 
 export default App;
-

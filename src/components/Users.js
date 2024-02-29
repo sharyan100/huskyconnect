@@ -5,7 +5,7 @@ import SearchFilter from './SearchFilter';
 const DEFAULT_IMAGE_PATH = 'images/uw-purple-background.jpeg';
 
 
-const Users = ({ posts, latestUser, cared, onCareClick }) => {
+const Users = ({ posts, latestUser, cared, onCareClick, onFlag}) => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -88,6 +88,10 @@ const Users = ({ posts, latestUser, cared, onCareClick }) => {
     onCareClick(userName);
   };
 
+  const handleFlag = (userName) => {
+    onFlag(userName);
+  };
+
   const handleFilter = useCallback((keyword) => {
     setSearchKeyword(keyword);
     const filtered = users.filter(user => (
@@ -110,16 +114,16 @@ const Users = ({ posts, latestUser, cared, onCareClick }) => {
     setFilteredUsers(filtered);
   }, [searchKeyword, users, cared]);
 
-
-
-  const userCards = filteredUsers.map((user, index) => (
+const userCards = filteredUsers.map((user, index) => (
     <UserCard
       key={user.name}
       {...user}
       onSwipeLeft={() => handleSwipeLeft(index)}
       onSwipeRight={() => handleSwipeRight(user.name)}
+      onFlag={() => handleFlag(user.name)}
     />
   ));
+
 
   return (
     <div className="container">
