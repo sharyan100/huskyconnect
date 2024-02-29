@@ -391,3 +391,53 @@ input[id=careerAspirations] {
   width: 100%; 
   box-sizing: border-box; 
 }
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; 
+}
+
+.carousel > .slide {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  margin-right: 10px;
+}
+
+.carousel img {
+  max-width: 100%;
+  height: auto;
+}
+
+.slide {
+  display: auto;
+}
+
+.slide.active {
+  display: auto; 
+}
+
+.carousel-container {
+  position: relative;
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  color: #555;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 2; 
+}
+
+.prev {
+  left: 0; 
+}
+
+.next {
+  right: 0;
+}

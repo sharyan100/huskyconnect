@@ -1,11 +1,10 @@
-// UserCard.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import FlagPopup from './FlagPopup'; // Import the FlagPopup component
+import FlagPopup from './FlagPopup'; 
 
 const UserCard = ({ name, major, content, description, imageSrc, onSwipeLeft, onSwipeRight, onFlag }) => {
   const [visible, setVisible] = useState(true);
-  const [showFlagPopup, setShowFlagPopup] = useState(false); // State to control visibility of flag popup
+  const [showFlagPopup, setShowFlagPopup] = useState(false); 
 
   const handleSwipeLeft = () => {
     setVisible(false);
@@ -18,7 +17,7 @@ const UserCard = ({ name, major, content, description, imageSrc, onSwipeLeft, on
   };
 
   const handleFlagClick = () => {
-    setShowFlagPopup(true); // Show the flag popup when flag button is clicked
+    setShowFlagPopup(true);
   };
 
   const handleCloseFlagPopup = () => {

@@ -78,18 +78,12 @@ const Users = ({ posts, latestUser, cared, onCareClick, onFlag}) => {
     setUsers(newUsers);
   };
 
-  // const handleSwipeRight = (index) => {
-  //   const newUsers = [...users];
-  //   newUsers[index].visible = false;
-  //   setUsers(newUsers);
-  // };
-
   const handleSwipeRight = (userName) => {
     onCareClick(userName);
   };
 
-  const handleFlag = (userName) => {
-    onFlag(userName);
+  const handleFlag = (userName, reason) => {
+    console.log(`User ${userName} flagged for reason: ${reason}`);
   };
 
   const handleFilter = useCallback((keyword) => {
