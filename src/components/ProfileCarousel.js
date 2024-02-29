@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import UserCard from './UserCard';
 import '../index.css';
 
-
-const ProfileCarousel = ({ profiles, onCareClick}) => {
+const ProfileCarousel = ({ profiles, onCareClick, onFlag }) => { 
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const goToSlide = (index) => {
@@ -20,8 +19,6 @@ const ProfileCarousel = ({ profiles, onCareClick}) => {
     setCurrentSlide(nextSlide);
   };
 
-  
-
   return (
     <div className="carousel-container">
       <h2>Browse Posts</h2>
@@ -30,11 +27,12 @@ const ProfileCarousel = ({ profiles, onCareClick}) => {
           <div key={index} className={`slide ${index === currentSlide ? 'active' : ''}`}>
             <UserCard
               name={profile.title}
-              content=""
               description={profile.description}
               imageSrc={profile.imageUrl}
+              major={profile.major}
               onSwipeLeft={() => {}}
               onSwipeRight={() => onCareClick(profile.title)}
+              onFlag={onFlag} 
             />
           </div>
         ))}
