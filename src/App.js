@@ -60,9 +60,9 @@ function App() {
       <Header />
       <main>
         <Routes>
-          <Route path="profile" element={<Profile onCreatePost={handleCreatePost} />} />
+          <Route path="newPost" element={<Profile onCreatePost={handleCreatePost} />} />
           <Route path="login" element={<Login />} />
-          <Route path="matches" element={<Matches cared={cared} />} />
+          <Route path="saved" element={<Matches cared={cared} />} />
           <Route
             path="/"
             element={

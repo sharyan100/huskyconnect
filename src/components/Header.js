@@ -11,10 +11,10 @@ function Header() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/profile">Profile</Link>
+            <Link to="/newPost">New Post</Link>
           </li>
           <li>
-            <Link to="/matches">Matches</Link>
+            <Link to="/saved">Saved Posts</Link>
           </li>
           <li>
             <Link to="/login">Login</Link>

@@ -74,7 +74,8 @@ function Matches({ cared }) {
   return (
     <div className="matches-container">
       <div className="profiles-container">
-        <h2>Matched Posts</h2>
+        <h2>Saved Posts</h2>
+        <p> Click "care" on any post you find interesting and it will save here if you are logged in!</p>
         <form onSubmit={event => {
           event.preventDefault();
         }} className="filter-bar">
@@ -90,7 +91,7 @@ function Matches({ cared }) {
             <button type="submit">Filter</button>
           </div>
         </form>
-        {matchedUserCards.length > 0 ? matchedUserCards : <p>No matches found.</p>}
+        {matchedUserCards.length > 0 ? matchedUserCards : <p>No posts found.</p>}
       </div>
       <div className="chat-section">
         {activeUser && <Chat user={activeUser} />}
