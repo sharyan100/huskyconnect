@@ -14,7 +14,7 @@ function Header() {
             <Link to="/newPost">New Post</Link>
           </li>
           <li>
-            <Link to="/saved">Saved Posts</Link>
+            <Link to="/matches">Saved Posts</Link>
           </li>
           <li>
             <Link to="/login">Login</Link>
