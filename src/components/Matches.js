@@ -75,7 +75,7 @@ function Matches({ cared }) {
     <div className="matches-container">
       <div className="profiles-container">
         <h2>Saved Posts</h2>
-        <p> Click "care" on any post you find interesting and it will save here if you are logged in!</p>
+        <p> Click "Care" on any posts you find interesting and they will save here if you are logged in!</p>
         <form onSubmit={event => {
           event.preventDefault();
         }} className="filter-bar">

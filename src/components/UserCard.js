@@ -34,7 +34,7 @@ const UserCard = ({ name, major, content, description, imageSrc, onSwipeLeft, on
             </div>
             <div>
               <h2>{name}</h2>
-              <p>Major: {major}</p>
+              <p>Topic: {major}</p>
               <p>{content}</p>
               <p>{description}</p> 
             </div>
@@ -62,7 +62,7 @@ const UserCard = ({ name, major, content, description, imageSrc, onSwipeLeft, on
         <img className="pb-3 profile-image img-fluid" src={imageSrc} alt={`Profile of ${name}`} style={{ maxWidth: '100%', maxHeight: '200px' }} />
           <div>
             <h2>{name}</h2>
-            <h4>Major: {major}</h4>
+            <h4>Topic: {major}</h4>
             <p>{content}</p>
             <p>{description}</p> 
           </div>
