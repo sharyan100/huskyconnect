@@ -42,7 +42,7 @@ export default function Login() {
         </div>
       ) : (
         <div>
-          <h1>My App</h1>
+          <h2>Log In</h2>
           <p>Please sign-in:</p>
           <StyledFirebaseAuth uiConfig={firebaseUiConfigObj} firebaseAuth={auth} />
         </div>
