@@ -7,7 +7,7 @@ import Users from './components/Users';
 import Match from './components/Match';
 import Login from './components/Login';
 import ProfileCarousel from './components/ProfileCarousel';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 function App() {
   const [latestUser, setLatestUser] = useState(null);
@@ -90,6 +90,7 @@ function App() {
             }
           />
           <Route path="match" element={<Match />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </main>
       <footer>
