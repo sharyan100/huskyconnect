@@ -5,7 +5,7 @@ import SearchFilter from './SearchFilter';
 const DEFAULT_IMAGE_PATH = 'images/uw-purple-background.jpeg';
 
 
-const Users = ({ posts, latestUser, cared, onCareClick, onFlag}) => {
+const Users = ({ posts, latestUser, cared, doNotCared, onCareClick, onDoNotCareClick, onFlag}) => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -68,14 +68,12 @@ const Users = ({ posts, latestUser, cared, onCareClick, onFlag}) => {
       });
     }
 
-  const visibleUsers = fetchedUsers.filter(user => !cared.includes(user.name));
+  const visibleUsers = fetchedUsers.filter(user => !cared.includes(user.name) && !doNotCared.includes(user.name));
   setUsers(visibleUsers);
-}, [latestUser, cared]);
+}, [latestUser, cared, doNotCared]);
 
-  const handleSwipeLeft = (index) => {
-    const newUsers = [...users];
-    newUsers[index].visible = false;
-    setUsers(newUsers);
+  const handleSwipeLeft = (userName) => {
+    onDoNotCareClick(userName);
   };
 
   const handleSwipeRight = (userName) => {
@@ -93,10 +91,11 @@ const Users = ({ posts, latestUser, cared, onCareClick, onFlag}) => {
       user.content.toLowerCase().includes(keyword.toLowerCase()) ||
       user.major.toLowerCase().includes(keyword.toLowerCase()) ||
       user.description.toLowerCase().includes(keyword.toLowerCase())) &&
-      !cared.includes(user.name)
+      !cared.includes(user.name) &&
+      !doNotCared.includes(user.name)
     ));
     setFilteredUsers(filtered);
-  }, [users, cared]);
+  }, [users, cared, doNotCared]);
 
   useEffect(() => {
     const filtered = searchKeyword === '' ? users : users.filter(user => (
@@ -104,15 +103,15 @@ const Users = ({ posts, latestUser, cared, onCareClick, onFlag}) => {
       user.content.toLowerCase().includes(searchKeyword.toLowerCase()) ||
       user.major.toLowerCase().includes(searchKeyword.toLowerCase()) ||
       user.description.toLowerCase().includes(searchKeyword.toLowerCase())
-    ) && !cared.includes(user.name));
+    ) && !cared.includes(user.name) && !doNotCared.includes(user.name));
     setFilteredUsers(filtered);
-  }, [searchKeyword, users, cared]);
+  }, [searchKeyword, users, cared, doNotCared]);
 
-const userCards = filteredUsers.map((user, index) => (
+const userCards = filteredUsers.map((user) => (
     <UserCard
       key={user.name}
       {...user}
-      onSwipeLeft={() => handleSwipeLeft(index)}
+      onSwipeLeft={() => handleSwipeLeft(user.name)}
       onSwipeRight={() => handleSwipeRight(user.name)}
       onFlag={() => handleFlag(user.name)}
     />

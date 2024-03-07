@@ -12,6 +12,7 @@ import { Route, Routes } from 'react-router-dom';
 function App() {
   const [latestUser, setLatestUser] = useState(null);
   const [cared, setCared] = useState([]);
+  const [doNotCared, setDoNotCared] = useState([])
 
   const handleCareClick = userName => {
     setCared(currentCared => {
@@ -20,6 +21,15 @@ function App() {
       }
       return currentCared;
     });
+  };
+
+  const handleDoNotCareClick = userName => {
+    setDoNotCared(currentDoNotCared => {
+      if (!currentDoNotCared.includes(userName)) {
+        return [...currentDoNotCared, userName];
+      }
+      return currentDoNotCared;
+    })
   };
 
   const handleCreatePost = (newUser) => {
@@ -70,10 +80,12 @@ function App() {
                 <Users
                   latestUser={latestUser}
                   cared={cared}
+                  doNotCared={doNotCared}
                   onCareClick={handleCareClick}
+                  onDoNotCareClick={handleDoNotCareClick}
                   onFlag={handleFlag}
                 />
-                <ProfileCarousel profiles={carouselProfiles} onCareClick={handleCareClick} onFlag={handleFlag} /> {/* Pass onFlag here */}
+                <ProfileCarousel profiles={carouselProfiles} onCareClick={handleCareClick} onDoNotCareClick={handleDoNotCareClick} onFlag={handleFlag} /> {/* Pass onFlag here */}
               </>
             }
           />
